@@ -1,27 +1,24 @@
 package com.example.shopping;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import java.util.ArrayList;
-
-
-import com.example.shopping.adapter.GoodsPagerAdapter;
-import com.example.shopping.util.DateUtil;
-import com.example.shopping.util.MenuUtil;
-
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
-import com.google.android.material.tabs.TabLayout.Tab;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
+import com.example.shopping.adapter.GoodPagerAdapter;
+import com.example.shopping.util.DateUtil;
+import com.example.shopping.util.MenuUtil;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
+import com.google.android.material.tabs.TabLayout.Tab;
+
+import java.util.ArrayList;
 
 public class TabLayoutActivity extends AppCompatActivity implements OnTabSelectedListener {
     private final static String TAG = "TabLayoutActivity";
@@ -71,7 +68,7 @@ public class TabLayoutActivity extends AppCompatActivity implements OnTabSelecte
         // 从布局文件中获取名叫vp_content的翻页视图
         vp_content = findViewById(R.id.vp_content);
         // 构建一个商品信息的翻页适配器
-        GoodsPagerAdapter adapter = new GoodsPagerAdapter(
+        GoodPagerAdapter adapter = new GoodPagerAdapter(
                 getSupportFragmentManager(), mTitleArray);
         // 给vp_content设置商品翻页适配器
         vp_content.setAdapter(adapter);

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopping.bean.CartInfo;
-import com.example.shopping.bean.GoodsInfo;
+import com.example.shopping.bean.GoodInfo;
 import com.example.shopping.database.CartDBHelper;
 import com.example.shopping.database.GoodsDBHelper;
 import com.example.shopping.util.DateUtil;
@@ -114,7 +114,7 @@ public class ShoppingDetailActivity extends AppCompatActivity implements View.On
         mGoodsId = getIntent().getLongExtra("goods_id", 0L);
         if (mGoodsId > 0) {
             // 根据商品编号查询商品数据库中的商品记录
-            GoodsInfo info = mGoodsHelper.queryById(mGoodsId);
+            GoodInfo info = mGoodsHelper.queryById(mGoodsId);
             tv_title.setText(info.name);
             tv_goods_desc.setText(info.desc);
             tv_goods_price.setText("" + info.price);

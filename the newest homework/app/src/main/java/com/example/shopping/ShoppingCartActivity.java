@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextMenu;
@@ -23,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopping.bean.CartInfo;
-import com.example.shopping.bean.GoodsInfo;
+import com.example.shopping.bean.GoodInfo;
 import com.example.shopping.database.CartDBHelper;
 import com.example.shopping.database.GoodsDBHelper;
 import com.example.shopping.util.SharedUtil;
@@ -199,7 +197,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     // 声明一个购物车中的商品信息队列
     private ArrayList<CartInfo> mCartArray = new ArrayList<CartInfo>();
     // 声明一个根据商品编号查找商品信息的映射
-    private HashMap<Long, GoodsInfo> mGoodsMap = new HashMap<Long, GoodsInfo>();
+    private HashMap<Long, GoodInfo> mGoodsMap = new HashMap<Long, GoodInfo>();
 
     // 展示购物车中的商品列表
     private void showCart() {
@@ -216,7 +214,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         for (int i = 0; i < mCartArray.size(); i++) {
             final CartInfo info = mCartArray.get(i);
             // 根据商品编号查询商品数据库中的商品记录
-            GoodsInfo goods = mGoodsHelper.queryById(info.goods_id);
+            GoodInfo goods = mGoodsHelper.queryById(info.goods_id);
             Log.d(TAG, "name=" + goods.name + ",price=" + goods.price + ",desc=" + goods.desc);
             mGoodsMap.put(info.goods_id, goods);
             // 创建该商品行的水平线性视图，从左到右依次为商品小图、商品名称与描述、商品数量、商品单价、商品总价。
@@ -267,7 +265,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private void refreshTotalPrice() {
         int total_price = 0;
         for (CartInfo info : mCartArray) {
-            GoodsInfo goods = mGoodsMap.get(info.goods_id);
+            GoodInfo goods = mGoodsMap.get(info.goods_id);
             total_price += goods.price * info.count;
         }
         tv_total_price.setText("" + total_price);

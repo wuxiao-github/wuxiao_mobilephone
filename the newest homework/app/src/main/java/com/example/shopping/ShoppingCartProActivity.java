@@ -4,12 +4,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -23,14 +21,12 @@ import android.widget.Toast;
 
 import com.example.shopping.adapter.CartAdapter;
 import com.example.shopping.bean.CartInfo;
-import com.example.shopping.bean.GoodsInfo;
+import com.example.shopping.bean.GoodInfo;
 import com.example.shopping.database.CartDBHelper;
 import com.example.shopping.database.GoodsDBHelper;
-import com.example.shopping.util.FileUtil;
 import com.example.shopping.util.SharedUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ShoppingCartProActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private final static String TAG = "ShoppingCartProActivity";
@@ -235,7 +231,7 @@ public class ShoppingCartProActivity extends AppCompatActivity implements View.O
         for (int i = 0; i < mCartArray.size(); i++) {
             CartInfo info = mCartArray.get(i);
             // 根据商品编号查询商品数据库中的商品记录
-            GoodsInfo goods = mGoodsHelper.queryById(info.goods_id);
+            GoodInfo goods = mGoodsHelper.queryById(info.goods_id);
             info.goods = goods;
             // 补充商品记录的商品详情
             mCartArray.set(i, info);
@@ -268,9 +264,9 @@ public class ShoppingCartProActivity extends AppCompatActivity implements View.O
     //模拟网络数据，初始化数据库中的商品信息
     private void downloadGoods() {
         // 查询商品数据库中所有商品记录
-        ArrayList<GoodsInfo> goodsArray = mGoodsHelper.query("1=1");
+        ArrayList<GoodInfo> goodsArray = mGoodsHelper.query("1=1");
         for (int i = 0; i < goodsArray.size(); i++) {
-            GoodsInfo info = goodsArray.get(i);
+            GoodInfo info = goodsArray.get(i);
             // 从指定路径读取图片文件的位图数据
             Bitmap thumb = BitmapFactory.decodeFile(info.thumb_path);
             // 把该位图对象保存到应用实例的全局变量中

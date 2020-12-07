@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTabHost;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.shopping.adapter.GoodsPagerAdapter;
+import com.example.shopping.adapter.GoodPagerAdapter;
 import com.example.shopping.util.DateUtil;
 import com.example.shopping.util.MenuUtil;
 import com.google.android.material.tabs.TabLayout;
@@ -115,7 +115,6 @@ public class TabFragmentActivity extends AppCompatActivity implements TabLayout.
         tab_title.addTab(tab_title.newTab().setText(mTitleArray.get(1)));
         tab_title.addTab(tab_title.newTab().setText(mTitleArray.get(2)));
 
-
         tab_title.addOnTabSelectedListener(this);
 
 
@@ -129,7 +128,7 @@ public class TabFragmentActivity extends AppCompatActivity implements TabLayout.
         // 从布局文件中获取名叫vp_content的翻页视图
         vp_content = findViewById(R.id.vp_content);
         // 构建一个商品信息的翻页适配器
-        GoodsPagerAdapter adapter = new GoodsPagerAdapter(
+        GoodPagerAdapter adapter = new GoodPagerAdapter(
                 getSupportFragmentManager(), mTitleArray);
         // 给vp_content设置商品翻页适配器
         vp_content.setAdapter(adapter);

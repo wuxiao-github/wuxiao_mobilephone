@@ -2,15 +2,11 @@ package com.example.shopping;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -18,7 +14,7 @@ import android.widget.TextView;
 import com.example.shopping.adapter.GoodsAdapter;
 import com.example.shopping.adapter.GoodsAdapter.addCartListener;
 import com.example.shopping.bean.CartInfo;
-import com.example.shopping.bean.GoodsInfo;
+import com.example.shopping.bean.GoodInfo;
 import com.example.shopping.database.CartDBHelper;
 import com.example.shopping.database.GoodsDBHelper;
 import com.example.shopping.util.DateUtil;
@@ -120,7 +116,7 @@ public class ShoppingChannelActivity extends AppCompatActivity implements View.O
 
     private void showGoods() {
         // 查询商品数据库中的所有商品记录
-        ArrayList<GoodsInfo> goodsArray = mGoodsHelper.query("1=1");
+        ArrayList<GoodInfo> goodsArray = mGoodsHelper.query("1=1");
         // 构建商场中商品网格的适配器对象
         GoodsAdapter adapter = new GoodsAdapter(this, goodsArray, this);
         // 给gv_channel设置商品网格适配器
@@ -139,9 +135,9 @@ public class ShoppingChannelActivity extends AppCompatActivity implements View.O
         String path = MainApplication.getInstance().getExternalFilesDir(
                 Environment.DIRECTORY_DOWNLOADS).toString() + "/";
         if (mFirst.equals("true")) { // 如果是首次打开
-            ArrayList<GoodsInfo> goodsList = GoodsInfo.getDefaultList();
+            ArrayList<GoodInfo> goodsList = GoodInfo.getDefaultList();
             for (int i = 0; i < goodsList.size(); i++) {
-                GoodsInfo info = goodsList.get(i);
+                GoodInfo info = goodsList.get(i);
                 // 往商品数据库插入一条该商品的记录
                 long rowid = mGoodsHelper.insert(info);
                 info.rowid = rowid;
@@ -162,9 +158,9 @@ public class ShoppingChannelActivity extends AppCompatActivity implements View.O
             }
         } else { // 不是首次打开
             // 查询商品数据库中所有商品记录
-            ArrayList<GoodsInfo> goodsArray = mGoodsHelper.query("1=1");
+            ArrayList<GoodInfo> goodsArray = mGoodsHelper.query("1=1");
             for (int i = 0; i < goodsArray.size(); i++) {
-                GoodsInfo info = goodsArray.get(i);
+                GoodInfo info = goodsArray.get(i);
                 // 从指定路径读取图片文件的位图数据
                 Bitmap thumb = BitmapFactory.decodeFile(info.thumb_path);
                 // 把该位图对象保存到应用实例的全局变量中

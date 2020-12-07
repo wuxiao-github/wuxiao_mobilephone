@@ -32,6 +32,25 @@
             android:name=".TabLayoutActivity"
             android:exported="true" />
         <activity
+            android:name=".RecyclerDynamicActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RecyclerStaggeredActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RecyclerCombineActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RecyclerGridActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RecyclerLinearActivity"
+            android:exported="true" />
+
+
+
+
+        <activity
             android:name=".SearchResultActvity"
             android:theme="@style/AppCompatTheme">
             <intent-filter>

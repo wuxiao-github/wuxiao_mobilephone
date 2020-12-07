@@ -2,8 +2,6 @@ package com.example.shopping;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shopping.bean.CartInfo;
-import com.example.shopping.bean.GoodsInfo;
+import com.example.shopping.bean.GoodInfo;
 import com.example.shopping.database.CartDBHelper;
 import com.example.shopping.database.GoodsDBHelper;
 import com.example.shopping.util.DateUtil;
@@ -129,11 +127,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 创建一行的线性布局
         LinearLayout ll_row = newLinearLayout(LinearLayout.HORIZONTAL, 0);
         // 查询商品数据库中的所有商品记录
-        ArrayList<GoodsInfo> goodsArray = mGoodsHelper.query("1=1");
+        ArrayList<GoodInfo> goodsArray = mGoodsHelper.query("1=1");
         Log.d(TAG, "size:" + goodsArray.size());
         int i = 0;
         for (; i < goodsArray.size(); i++) {
-            final GoodsInfo info = goodsArray.get(i);
+            final GoodInfo info = goodsArray.get(i);
             // 创建一个商品项的垂直线性布局，从上到下依次列出商品标题、商品图片、商品价格
             LinearLayout ll_goods = newLinearLayout(LinearLayout.VERTICAL, 1);
             ll_goods.setBackgroundColor(Color.WHITE);
@@ -219,9 +217,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String path = MainApplication.getInstance().getExternalFilesDir(
                 Environment.DIRECTORY_DOWNLOADS).toString() + "/";
         if (mFirst.equals("true")) { // 如果是首次打开
-            ArrayList<GoodsInfo> goodsList = GoodsInfo.getDefaultList();
+            ArrayList<GoodInfo> goodsList = GoodInfo.getDefaultList();
             for (int i = 0; i < goodsList.size(); i++) {
-                GoodsInfo info = goodsList.get(i);
+                GoodInfo info = goodsList.get(i);
                 // 往商品数据库插入一条该商品的记录
                 long rowid = mGoodsHelper.insert(info);
                 info.rowid = rowid;
@@ -242,9 +240,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } else { // 不是首次打开
             // 查询商品数据库中所有商品记录
-            ArrayList<GoodsInfo> goodsArray = mGoodsHelper.query("1=1");
+            ArrayList<GoodInfo> goodsArray = mGoodsHelper.query("1=1");
             for (int i = 0; i < goodsArray.size(); i++) {
-                GoodsInfo info = goodsArray.get(i);
+                GoodInfo info = goodsArray.get(i);
                 // 从指定路径读取图片文件的位图数据
                 Bitmap thumb = BitmapFactory.decodeFile(info.thumb_path);
                 // 把该位图对象保存到应用实例的全局变量中

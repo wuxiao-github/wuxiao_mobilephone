@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.shopping.bean.GoodsInfo;
+import com.example.shopping.bean.GoodInfo;
 
 import java.util.ArrayList;
 
@@ -96,16 +96,16 @@ public class GoodsDBHelper extends SQLiteOpenHelper {
     }
 
     // 往该表添加一条记录
-    public long insert(GoodsInfo info) {
-        ArrayList<GoodsInfo> infoArray = new ArrayList<GoodsInfo>();
+    public long insert(GoodInfo info) {
+        ArrayList<GoodInfo> infoArray = new ArrayList<GoodInfo>();
         infoArray.add(info);
         return insert(infoArray);
     }
 
     // 往该表添加多条记录
-    public long insert(ArrayList<GoodsInfo> infoArray) {
+    public long insert(ArrayList<GoodInfo> infoArray) {
         long result = -1;
-        for (GoodsInfo info : infoArray) {
+        for (GoodInfo info : infoArray) {
             // 如果存在相同rowid的记录，则更新记录
             if (info.rowid > 0) {
                 String condition = String.format("rowid='%d'", info.rowid);
@@ -131,7 +131,7 @@ public class GoodsDBHelper extends SQLiteOpenHelper {
     }
 
     // 根据条件更新指定的表记录
-    public int update(GoodsInfo info, String condition) {
+    public int update(GoodInfo info, String condition) {
         ContentValues cv = new ContentValues();
         cv.put("name", info.name);
         cv.put("desc", info.desc);
@@ -142,22 +142,22 @@ public class GoodsDBHelper extends SQLiteOpenHelper {
         return mDB.update(TABLE_NAME, cv, condition, null);
     }
 
-    public int update(GoodsInfo info) {
+    public int update(GoodInfo info) {
         // 执行更新记录动作，该语句返回记录更新的数目
         return update(info, "rowid=" + info.rowid);
     }
 
     // 根据指定条件查询记录，并返回结果数据队列
-    public ArrayList<GoodsInfo> query(String condition) {
+    public ArrayList<GoodInfo> query(String condition) {
         String sql = String.format("select rowid,_id,name,desc,price,thumb_path,pic_path" +
                 " from %s where %s;", TABLE_NAME, condition);
         Log.d(TAG, "query sql: " + sql);
-        ArrayList<GoodsInfo> infoArray = new ArrayList<GoodsInfo>();
+        ArrayList<GoodInfo> infoArray = new ArrayList<GoodInfo>();
         // 执行记录查询动作，该语句返回结果集的游标
         Cursor cursor = mDB.rawQuery(sql, null);
         // 循环取出游标指向的每条记录
         while (cursor.moveToNext()) {
-            GoodsInfo info = new GoodsInfo();
+            GoodInfo info = new GoodInfo();
             info.rowid = cursor.getLong(0);
             info.sn = cursor.getInt(1);
             info.name = cursor.getString(2);
@@ -172,9 +172,9 @@ public class GoodsDBHelper extends SQLiteOpenHelper {
     }
 
     // 根据行号查询指定记录
-    public GoodsInfo queryById(long rowid) {
-        GoodsInfo info = null;
-        ArrayList<GoodsInfo> infoArray = query(String.format("rowid='%d'", rowid));
+    public GoodInfo queryById(long rowid) {
+        GoodInfo info = null;
+        ArrayList<GoodInfo> infoArray = query(String.format("rowid='%d'", rowid));
         if (infoArray.size() > 0) {
             info = infoArray.get(0);
         }
