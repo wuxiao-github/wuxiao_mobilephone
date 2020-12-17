@@ -1,20 +1,23 @@
 package com.example.shopping.adapter;
 
+import android.util.Log;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.shopping.fragment.BookCoverFragment;
 import com.example.shopping.fragment.BookDetailFragment;
+import com.example.shopping.fragment.LayoutFirstFragment;
 
 import java.util.ArrayList;
 
 
-public class GoodsPagerAdapter extends FragmentStatePagerAdapter {
+public class GoodPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<String> mTitleArray; // 声明一个标题文字队列
 
     // 碎片页适配器的构造函数，传入碎片管理器与标题队列
-    public GoodsPagerAdapter(FragmentManager fm, ArrayList<String> titleArray) {
+    public GoodPagerAdapter(FragmentManager fm, ArrayList<String> titleArray) {
         super(fm);
         mTitleArray = titleArray;
     }
@@ -25,8 +28,10 @@ public class GoodsPagerAdapter extends FragmentStatePagerAdapter {
             return new BookCoverFragment();
         } else if (position == 1) { // 第二页展示书籍详情
             return new BookDetailFragment();
+        }else { // 第二页展示书籍详情
+            return new LayoutFirstFragment();
         }
-        return new BookCoverFragment();
+
     }
 
     // 获取碎片Fragment的个数
@@ -36,6 +41,7 @@ public class GoodsPagerAdapter extends FragmentStatePagerAdapter {
 
     // 获得指定碎片页的标题文本
     public CharSequence getPageTitle(int position) {
+        Log.d("TAG", "getPageTitle: "+position);
         return mTitleArray.get(position);
     }
 }

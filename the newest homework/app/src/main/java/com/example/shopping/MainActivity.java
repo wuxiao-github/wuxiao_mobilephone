@@ -1,7 +1,5 @@
 package com.example.shopping;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.shopping.bean.CartInfo;
 import com.example.shopping.bean.GoodInfo;
 import com.example.shopping.database.CartDBHelper;
@@ -29,7 +29,7 @@ import com.example.shopping.util.Utils;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainMenu extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "ShoppingChannel";
     private TextView tv_count;
     private LinearLayout ll_channel;
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             iv_thumb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, ShoppingDetailActivity.class);
+                    Intent intent = new Intent(MainMenu.this, ShoppingDetailActivity.class);
                     intent.putExtra("goods_id", info.rowid);
                     startActivity(intent);
                 }
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 public void onClick(View v) {
                     addToCart(info.rowid);
-                    Toast.makeText(MainActivity.this,
+                    Toast.makeText(MainMenu.this,
                             "已添加一部" + info.name + "到购物车", Toast.LENGTH_SHORT).show();
                 }
             });
